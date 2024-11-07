@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Win</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <p class="title">Beach Win</p>
+        
+        <a href="{{ url_for('cart.view_cart') }}"><img class="logo_pesquisa" src="https://cdn-icons-png.flaticon.com/256/4/4295.png" alt="logo_pesquisa" class="logo_pesquisa"></a>
+        
+    </header>
+    <section id="hero">
+        <img src="https://img.freepik.com/vetores-gratis/modelo-de-logotipo-de-tenis-de-praia-desenhado-a-mao_23-2149399513.jpg" alt="Logo" >
+    </section>
+   
+    
+    <div class="categories">
+        <h2 class="categorias">Categorias</h2>
+        <div class="categories-grid">
+            {% for category in categories %}
+            <div class="category-item categorias">
+                <a href="{{ url_for('product.list_products_by_category', category_id=category.id) }}">{{ category.name }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <h2>Produtos em Destaque</h2>
+    <div class="product-grid">
+        {% for product in products %}
+        <a href="{{ url_for('product.product_detail', product_id=product.id) }}"></a>
+            <div class="product-item">
+                <img src="{{ product.images[0] }}" alt="{{ product.name }}" class="product-image">
+                <h3>{{ product.name }}</h3>
+                <p>Preço: ${{ product.price }}</p>
+                <p>{{ product.description }}</p>
+                
+                <form action="{{ url_for('cart.add_to_cart', product_id=product.id) }}" method="POST">
+                    <input type="number" name="quantity" value="1" min="1">
+                    <button type="submit">Adicionar ao Carrinho</button>
+                    
+                </form>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    
+    <footer>
+        <p><b>insta:</b>@otaviogturra - Prof Beach - Vem cmg q é sucesso!!</p>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
